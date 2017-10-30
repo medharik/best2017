@@ -1,0 +1,78 @@
+*{
+	font-family: "Lucida Grande", Gadget, sans-serif;
+}
+body{
+	background: #EEEEEE;
+}
+h1,h2,h3{
+	text-align: center;
+	/* text-transform: uppercase */
+	font-variant: small-caps;
+
+}
+p{
+	text-indent: 30px;
+	text-align: justify;
+	border: 2px grey solid;
+	padding: 10px;
+	border-radius: 5px; 
+}
+
+/* les pseudos classes */
+p:first-letter{
+	color: red;
+	font-size: 1.2em;
+	font-weight: bolder;
+}
+table{
+	width: 100%;
+	background: #EFEFEF;
+	border: 0px #ccc solid;
+}
+thead , tfoot {
+background: red;
+color: white;
+}
+td,th{
+	border: 0px solid #ccc;
+padding: 10px;
+}
+
+li{
+	list-style: none;
+	border: 1px solid black;
+
+	text-align: center;
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	line-height: 100px; /* pour center la ligne verticalement */
+	border-radius: 50px; /* arrondi */
+
+	background: purple;
+	color: white;
+}
+tbody tr:nth-child(2n){ 
+background: black;
+color: white;
+}
+
+li:first-letter{
+	color: red;
+	font-size: 2em;
+	text-transform: uppercase !important;
+}
+li:hover{
+	background: #7AB8DF;
+	transition: 0.5s ease-in;
+	border-radius: 0;
+}
+p:hover{
+	background: black;
+color: white;
+
+}
+p{
+	column-count: 3;
+transition: 1s;	
+}
