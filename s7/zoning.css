@@ -1,0 +1,72 @@
+*{
+	margin: 0;padding: 0;
+}
+.b{
+	border: 1px solid black;
+	box-sizing: border-box; 
+}
+.l{
+	width: 100%;
+}
+#nav{
+	height: 80px;
+	background: #536024;
+	-webkit-box-shadow: 0 2px 4px undefinedpx #0A0A0A;
+box-shadow: 0 2px 4px undefinedpx #0A0A0A;
+}
+#logo{
+	width: 200px;
+	height: 80px;
+	
+	text-align: center;
+	padding-top:10px; 
+	box-sizing: border-box;
+	float: left;
+
+}
+#menu{
+font-family: 'Dosis', sans-serif;
+width: 800px;
+height: 80px;
+float: right;
+display: flex;	
+
+}
+#menu a{
+	color: white;
+	text-decoration: none;
+	padding: 0 15px;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	font-size: 2em;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+#menu a:hover{
+	background: #933241;
+}
+
+#contenu{
+
+	height: 500px;
+	background:#EBF3F5 url('images/banner.jpg') top center  no-repeat;
+background-size: 100%;
+}
+#pub{
+	width: 800px;
+	height: 400px;
+	margin: auto;
+	position: relative;
+	top: 48px;
+}
+
+
+#pied{
+	height: 200px;
+}
+.e{
+	width: 25%;
+	height: 200px;
+	float: left;
+}
