@@ -1,0 +1,23 @@
+*{	margin: 0;padding: 0;}
+#produits{
+	width: 900px;
+	min-height:600px;
+	margin: auto;
+	display: flex;
+ flex-wrap: wrap;
+justify-content: space-around;background: grey;
+}
+.p{
+	width: 200px;
+	height: 300px;
+	margin-bottom: 20px; 
+text-align: center;
+background: #EEE;
+
+}
+.p img{
+	max-width: 100%;
+}
+.b{
+	border: 0px solid black;
+}
