@@ -1,0 +1,64 @@
+*{	margin: 0;padding: 0;}
+.b{
+	border: 1px solid black;
+}
+header{
+	width: 100%;
+	height: 60px;
+position: fixed;
+top: 0;
+}
+section{
+	width: 100%;
+	height:400px;
+
+}
+aside{
+width: 200px;
+height: 300px;
+position: fixed;
+top: 70px;
+}
+.pub1{
+	width: 100px;
+	height: 100px;
+background: red;
+position: relative;
+z-index: 2;
+opacity: 0.6;
+}
+.pub2{
+	width: 100px;
+	height: 100px;
+background: green;
+position: relative;
+left: 50px;
+bottom: 50px;
+}
+.rond{
+	border-radius: 50px;
+}
+.pub3{
+		width: 100px;
+	height: 100px;
+background: blue;
+position: relative;
+top: -100px;
+left: 100px;
+}
+.g{
+left: 0;
+}
+.d{
+right: 0;
+}
+footer{
+	width: 100%;
+	height: 60px;
+	position: fixed;
+	bottom: 0;
+	background: yellow;
+	opacity: 0.6;
+
+
+}
