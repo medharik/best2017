@@ -1,0 +1,14 @@
+.menu{
+	background: orange;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+.jaune{
+	background: yellow !important;
+}
+
+h2,h3{
+	text-align: center;
+}
