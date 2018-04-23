@@ -1,0 +1,149 @@
+<?php 
+include 'fonctions.php';
+extract($_POST);
+extract($_GET);
+if(isset($_FILES['chemin'])){
+ $chemin= charger_fichier($_FILES['chemin']);
+}
+
+// si chemin
+
+// si on veut ajouter
+if(isset($nom) && !empty($nom) && isset($chemin) && !empty($chemin)) {
+  ajouter_categorie($nom, $chemin);
+  header("location:categorie.php?add=ok");
+}
+
+
+$categories=get_all("categorie");
+ ?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Catégories</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- menu admin -->
+<nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ESPACE ADMIN</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">ACCUEIL</a></li>
+            <li><a href="#about">Catégories</a></li>
+            <li><a href="#contact">Produits</a></li>
+           
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+           
+            <li class="active"><a href="./">Déconnexion<span class="sr-only"></span></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<!-- form -->
+<div class="container">
+  <?php if (isset($add) && $add=='ok'): ?>
+  <div class="alert alert-succes">
+      ajout effefctué avec succès
+  </div>
+  <?php endif ?>
+<form class="form-horizontal" action="categorie.php" method="post" enctype="multipart/form-data">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Categorie :</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nom">Nom:</label>  
+  <div class="col-md-4">
+  <input id="nom" name="nom" type="text" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="chemin">Images de la catégories</label>
+  <div class="col-md-4">
+    <input id="chemin" name="chemin" class="input-file" type="file">
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for=""></label>
+  <div class="col-md-4">
+    <button id="" name="" class="btn btn-primary">Valider</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+<hr>
+
+<table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Photo</th>
+                <th>action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+<?php foreach ($categories as $c): ?>
+  <tr>
+                <td><?php echo $c['id']; ?></td>
+                <td><?php echo $c['nom']; ?></td>
+                <td><img src="<?php echo $c['chemin']; ?>" alt="" class="img-responsive" style="width: 100px"></td>
+                <td></td>
+              </tr>
+
+<?php endforeach ?>
+              
+
+
+
+             
+            </tbody>
+          </table>
+
+</div>
+
+<!-- tableau -->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

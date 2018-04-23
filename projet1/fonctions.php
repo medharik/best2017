@@ -1,0 +1,75 @@
+<?php 
+function connecter()
+{ //php completion kit
+$cnx= new PDO('mysql:host=localhost;dbname=bestprojet1', 
+	"root", "");
+return $cnx;
+}
+function ajouter_produit($nom,$prix,$chemin,$details,$categorie_id)
+{
+	$cnx=connecter();
+$rp=	$cnx->prepare("insert into produit (nom,prix,chemin,details,categorie_id) values (?,?,?,?,?)");
+$rp->execute(array($nom,$prix,$chemin,$details,$categorie_id));
+}
+
+function ajouter_categorie($nom,$chemin)
+{
+	$cnx=connecter();
+$rp=	$cnx->prepare("insert into categorie (nom,chemin) values (?,?)");
+$rp->execute(array($nom,$chemin));
+
+}
+
+
+
+function supprimer($id,$table)
+{
+	$cnx=connecter();
+$rp=	$cnx->prepare("delete from $table where id=?");
+
+$rp->execute(array($id));
+}
+
+
+function modifier_produit($produit_id,$new_libelle,$new_prix)
+{
+	$cnx=connecter();
+$rp=	$cnx->prepare("update produit set libelle=?, prix=? where id=?");
+
+$rp->execute(array($libelle,$prix,$produit_id));
+}
+
+function get_all($table)
+{
+	$cnx=connecter();
+$rp=	$cnx->prepare("select * from $table");
+
+$rp->execute(array());
+$data=$rp->fetchAll();
+return $data;
+}
+
+//get by id
+function get_by_id($id,$table)
+{
+	$cnx=connecter();
+$rp=	$cnx->prepare("select * from $table wher id =?");
+
+$rp->execute(array($id));
+$data=$rp->fetch();
+return $data;
+}
+
+function  charger_fichier($infos){
+$chemin="";
+	extract($infos);
+if(isset($name) && isset($tmp_name)){
+$chemin="images/$name";
+move_uploaded_file($tmp_name, $chemin);
+}
+return $chemin;
+}
+
+
+
+ ?>
