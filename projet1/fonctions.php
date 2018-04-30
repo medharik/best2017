@@ -31,12 +31,12 @@ $rp->execute(array($id));
 }
 
 
-function modifier_produit($produit_id,$new_libelle,$new_prix)
+function modifier_produit($produit_id,$new_nom,$new_prix,$new_chemin,$categorie_id,$details)
 {
 	$cnx=connecter();
-$rp=	$cnx->prepare("update produit set libelle=?, prix=? where id=?");
+$rp=	$cnx->prepare("update produit set nom=?, prix=?, details=?,chemin=?,categorie_id=?  where id=?");
 
-$rp->execute(array($libelle,$prix,$produit_id));
+$rp->execute(array($new_nom,$prix,$details,$chemin,$categorie_id,$produit_id));
 }
 
 function modifier_categorie($categorie_id,$new_nom,$new_chemin)

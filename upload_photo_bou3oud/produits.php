@@ -2,20 +2,14 @@
 include 'fonctions.php';
 extract($_POST);//extraire les données du form $libelle,$prix
 extract($_FILES['chemin']);//$name , $tmp_name
-
 if(isset($name) && isset($tmp_name)){
 $chemin="images/$name";
 move_uploaded_file($tmp_name, $chemin);
 }
-
 if ( isset($libelle)  &&  isset($prix) && isset($chemin)) {
-
 ajouter_produit($libelle, $prix, $chemin);
 $message="ajout du produit $libelle est réussi";
-
 }
-
-
 $produits=get_all();
  ?>
 <!DOCTYPE html>

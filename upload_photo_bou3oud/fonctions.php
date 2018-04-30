@@ -1,9 +1,11 @@
 <?php 
+//connection bd
 function connecter()
 { //php completion kit
 $cnx= new PDO('mysql:host=localhost;dbname=db2019', "root", "");
 return $cnx;
 }
+//ajouter produit
 function ajouter_produit($libelle,$prix,$chemin)
 {
 	$cnx=connecter();
@@ -37,6 +39,14 @@ $rp->execute(array());
 $data=$rp->fetchAll();
 return $data;
 }
-
+function  charger_fichier($infos){
+$chemin="";
+	extract($infos);
+if(isset($name) && isset($tmp_name)){
+$chemin="images/$name";
+move_uploaded_file($tmp_name, $chemin);
+}
+return $chemin;
+}
 
  ?>

@@ -38,5 +38,14 @@ $data=$rp->fetchAll();
 return $data;
 }
 
+function  charger_fichier($infos){
+$chemin="";
+	extract($infos);
+if(isset($name) && isset($tmp_name)){
+$chemin="images/$name";
+move_uploaded_file($tmp_name, $chemin);
+}
+return $chemin;
+}
 
  ?>
