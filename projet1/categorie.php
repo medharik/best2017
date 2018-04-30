@@ -2,22 +2,42 @@
 include 'fonctions.php';
 extract($_POST);
 extract($_GET);
+$btn="ajouter";
 if(isset($_FILES['chemin'])){
  $chemin= charger_fichier($_FILES['chemin']);
 }
-
 // si chemin
-
 // si on veut ajouter
-if(isset($nom) && !empty($nom) && isset($chemin) && !empty($chemin)) {
+if(isset($nom) && !empty($nom) && isset($chemin) && !empty($chemin) && !isset($id)) {
   ajouter_categorie($nom, $chemin);
   header("location:categorie.php?add=ok");
+}
+//si suppression
+if (isset($ids)) {
+  supprimer($ids, "categorie");
+}
+//si consultation
+if (isset($idc)) {
+  $categorie_consulter=get_by_id($idc, "categorie");
+
+}
+
+//si edition 
+if (isset($idm)) {
+  $categorie_modifier=get_by_id($idm, "categorie");
+  $btn="modifier";
+
+}
+//si modif
+
+if(isset($nom) && !empty($nom) && isset($chemin) && !empty($chemin) && isset($id)) {
+modifier_categorie($id, $nom, $chemin);
+  header("location:categorie.php?upd=ok");
 }
 
 
 $categories=get_all("categorie");
  ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,10 +46,8 @@ $categories=get_all("categorie");
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Catégories</title>
-
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -74,6 +92,10 @@ $categories=get_all("categorie");
   <?php endif ?>
 <form class="form-horizontal" action="categorie.php" method="post" enctype="multipart/form-data">
 <fieldset>
+  <?php if (isset($categorie_modifier)): ?>
+    <input type="hidden" name="id"
+     value="<?php echo $categorie_modifier['id']    ?>">
+  <?php endif ?>
 
 <!-- Form Name -->
 <legend>Categorie :</legend>
@@ -82,7 +104,7 @@ $categories=get_all("categorie");
 <div class="form-group">
   <label class="col-md-4 control-label" for="nom">Nom:</label>  
   <div class="col-md-4">
-  <input id="nom" name="nom" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="nom" name="nom" type="text" placeholder="" class="form-control input-md" required="" value="<?php if(isset($categorie_modifier)) echo $categorie_modifier['nom'] ?>"  >
     
   </div>
 </div>
@@ -99,12 +121,19 @@ $categories=get_all("categorie");
 <div class="form-group">
   <label class="col-md-4 control-label" for=""></label>
   <div class="col-md-4">
-    <button id="" name="" class="btn btn-primary">Valider</button>
+    <button id="" name="" class="btn btn-primary"><?php echo $btn; ?></button>
   </div>
 </div>
 
 </fieldset>
 </form>
+<?php if (isset($categorie_consulter)): ?>
+  <div>
+    <h2><?php echo $categorie_consulter['nom'] ?></h2>
+<img src="<?php echo $categorie_consulter['chemin'] ?>" alt="" width="100">
+  </div>
+
+<?php endif ?>
 
 <hr>
 
@@ -123,8 +152,13 @@ $categories=get_all("categorie");
   <tr>
                 <td><?php echo $c['id']; ?></td>
                 <td><?php echo $c['nom']; ?></td>
-                <td><img src="<?php echo $c['chemin']; ?>" alt="" class="img-responsive" style="width: 100px"></td>
-                <td></td>
+                <td><img src="<?php echo $c['chemin']; ?>" alt="" class="img-responsive" style="width: 100px  "></td>
+                <td>
+                  <a href="categorie.php?ids=<?php echo $c['id']; ?>" class="btn btn-danger" onclick="return confirm('voulez vous vraiment supprimer cet élément?')">Supprimer</a>
+                  <a href="categorie.php?idm=<?php echo $c['id']; ?>" class="btn btn-warning">Modifier</a>
+                  <a href="categorie.php?idc=<?php echo $c['id']; ?>" class="btn  btn-info">Consulter</a>
+
+                </td>
               </tr>
 
 <?php endforeach ?>

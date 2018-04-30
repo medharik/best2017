@@ -39,6 +39,13 @@ $rp=	$cnx->prepare("update produit set libelle=?, prix=? where id=?");
 $rp->execute(array($libelle,$prix,$produit_id));
 }
 
+function modifier_categorie($categorie_id,$new_nom,$new_chemin)
+{
+	$cnx=connecter();
+$rp=	$cnx->prepare("update categorie set nom=?, chemin=? where id=?");
+
+$rp->execute(array($new_nom,$new_chemin,$categorie_id));
+}
 function get_all($table)
 {
 	$cnx=connecter();
@@ -53,7 +60,7 @@ return $data;
 function get_by_id($id,$table)
 {
 	$cnx=connecter();
-$rp=	$cnx->prepare("select * from $table wher id =?");
+$rp=	$cnx->prepare("select * from $table where id =?");
 
 $rp->execute(array($id));
 $data=$rp->fetch();
